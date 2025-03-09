@@ -31,3 +31,35 @@ Then we execute (example with 2 qubits and 1000 iterations)
 ```
 python3 code/main.py 2 1000
 ```
+<br>
+<br>
+<br>
+The code is ready to simulate and example in which a flood is prediction
+
+<div align="center">
+<img width="800" alt="predictions" src="./results/predictions.png">
+</div>
+
+
+<br>
+<br>
+<br>
+
+The prediction with quantum analog Pasqal computer is centered in the right prediction.
+
+<div align="center">
+<img width="800" alt="predictions" src="./results/joint_quantum_MCMC.png">
+</div>
+
+
+
+<br>
+<br>
+<br>
+
+
+The comparison between classical and quantum algorithm shows how precise is the quantum algorithm
+
+<div align="center">
+<img width="800" alt="predictions" src="./results/marginal_comparison_MCMC.png">
+</div>
