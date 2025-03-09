@@ -9,7 +9,13 @@ class Plotter_climate_model:
 
         self.tools = tools
 
-    def plot_flood_model(self, Q_t, Q_mean, H_t, H_mean, show_plot=False):
+    def plot_flood_model(self, climate_model_parameters, show_plot=False):
+
+        Q_t = climate_model_parameters['Q_t']
+        Q_mean = climate_model_parameters['Q_mean']
+
+        Q_t = jnp.zeros(self.tools.get_config_variable('T'))
+        H_t = jnp.zeros(self.tools.get_config_variable('T'))
 
         # Visualization of discharge and water level evolution
         fig, ax = plt.subplots(1, 2, figsize=(12, 5))
@@ -38,7 +44,12 @@ class Plotter_climate_model:
         plt.savefig('./results/predictions_flood_model.png', dpi=300, bbox_inches="tight")
         if show_plot: plt.show()
 
-    def plot_classical_flooding_prob(self, P_Q_posterior, P_H_posterior, Q_final, H_final):
+    def plot_classical_flooding_prob(self, classical_MCMC_parameters):
+        
+        Q_final = classical_MCMC_parameters['Q_final']
+        H_final = classical_MCMC_parameters['H_final']
+        P_Q_posterior = classical_MCMC_parameters['P_Q_posterior']
+        P_H_posterior = classical_MCMC_parameters['P_H_posterior']
         
         # Compute the joint probability that either Q > threshold_Q or H > threshold_H
         P_joint = (P_Q_posterior > 0.5) | (P_H_posterior > 0.5)  # Joint probability (at least one exceeds the threshold)
@@ -74,7 +85,10 @@ class Plotter_climate_model:
         P_joint_mean = jnp.mean(P_joint)
         print(f"📌 Joint probability of flooding (Q > {self.tools.get_config_variable('umbral_Q')} or H > {self.tools.get_config_variable('umbral_H')}): {P_joint_mean:.4f}")
 
-    def plot_quantum_flooding_prob(self, mean_Q_array, mean_H_array):
+    def plot_quantum_flooding_prob(self, quantum_MCMC_parameters):
+        
+        mean_Q_array = quantum_MCMC_parameters['mean_Q_array']
+        mean_H_array = quantum_MCMC_parameters['mean_H_array']
         
         # 🔹 Compute the joint probability that either Q > threshold_Q or H > threshold_H
         P_joint = (mean_Q_array > self.tools.get_config_variable('umbral_Q')) | (mean_H_array > self.tools.get_config_variable('umbral_H'))  # Joint probability (at least one exceeds the threshold)

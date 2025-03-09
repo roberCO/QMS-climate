@@ -182,7 +182,7 @@ class Quantum_MCMC:
 
         return count_dict  # Return the dictionary of bitstring frequencies
 
-    def run_quantum_algorithm(self):
+    def run_qMCMC(self, num_bits_max, num_repetitions):
         
         # Initialize Q_t (discharge) and H_t (water level) arrays
         Q_t = jnp.zeros(self.tools.get_config_variable('T')).at[0].set(self.tools.get_config_variable('Q_obs'))
@@ -208,10 +208,6 @@ class Quantum_MCMC:
         # Define the bivariate normal distribution
         normal_bi = dist.MultivariateNormal(mean_vector, cov_matrix)
         
-        # 🔹 Define number of repetitions for Monte Carlo simulation
-        num_repetitions = 1000  # Number of iterations for statistical accuracy
-        num_bits_max = 2  # Initial number of bits per parameter (Q and H)
-
         # 🔹 Lists to store the mean values of Q (discharge) and H (water level)
         mean_Q_list = []
         mean_H_list = []
@@ -283,3 +279,10 @@ class Quantum_MCMC:
         )
 
         print(f"📄 Data saved successfully at: {self.tools.get_config_variable('data_save_path')+"QH_quantum_data.txt"}")
+
+        quantum_MCMC_parameters = {
+            'mean_Q_array': mean_Q_array,
+            'mean_H_array': mean_H_array
+        }
+
+        return quantum_MCMC_parameters

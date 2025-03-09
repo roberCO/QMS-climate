@@ -8,8 +8,13 @@ class Plotter_inference_results:
 
         self.tools = tools
 
-    def plot_classical_MCMC(self, Q_final, H_final, P_Q_posterior, P_H_posterior):
+    def plot_classical_MCMC(self, classical_MCMC_parameters):
         
+        Q_final = classical_MCMC_parameters['Q_final']
+        H_final = classical_MCMC_parameters['H_final']
+        P_Q_posterior = classical_MCMC_parameters['P_Q_posterior']
+        P_H_posterior = classical_MCMC_parameters['P_H_posterior']
+
         # Visualizing posterior distributions
         fig, ax = plt.subplots(1, 2, figsize=(12, 5))
 
@@ -49,7 +54,10 @@ class Plotter_inference_results:
         plt.xticks(rotation="vertical")
         plt.show()
 
-    def plot_quantum_inference(self, mean_Q_array, mean_H_array):
+    def plot_quantum_inference(self, quantum_MCMC_parameters):
+        
+        mean_Q_array = quantum_MCMC_parameters['mean_Q_array']
+        mean_H_array = quantum_MCMC_parameters['mean_H_array']
         
         # 🔹 Create subplots for visualizing the posterior distributions of Q (discharge) and H (water level)
         fig, ax = plt.subplots(1, 2, figsize=(12, 5))  # Two plots side by side
@@ -76,7 +84,10 @@ class Plotter_inference_results:
         # 🔹 Display the plot
         plt.show()
 
-    def plot_combined_inference(self, mean_Q_array, mean_H_array):
+    def plot_combined_inference(self, quantum_MCMC_parameters):
+        
+        mean_Q_array = quantum_MCMC_parameters['mean_Q_array']
+        mean_H_array = quantum_MCMC_parameters['mean_H_array']
 
         # 🔹 Define the path to the saved classical data file
         data_file_path = "./results/QH_classical_data.txt"

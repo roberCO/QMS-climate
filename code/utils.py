@@ -21,7 +21,7 @@ class Utils:
 
     def parse_arguments(self):
 
-        parser = argparse.ArgumentParser(description="Module to create an input of climate model for risk analysis for qms: Example ./python3 main.py 3 5")
+        parser = argparse.ArgumentParser(description="Module to create an input of climate model for risk analysis for qms: Example ./python3 main.py 2 1000")
 
         parser.add_argument("number_bits", help="number of bits to execute zoom-in/zoom-out", type=int)
         parser.add_argument("number_iterations", help="number of iterations to execute the quantum metropolis", type=int)

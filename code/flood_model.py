@@ -60,3 +60,10 @@ class Flood_model:
         # 🔹 Compute the probability that discharge and water level exceed thresholds
         prob_Q = numpyro.deterministic("P_Q", 1 - dist.Normal(Q_final, sigma_Q).cdf(self.tools.get_config_variable('umbral_Q')))
         prob_H = numpyro.deterministic("P_H", 1 - dist.Normal(H_final, sigma_H).cdf(self.tools.get_config_variable('umbral_H')))
+
+        climate_model_parameters = {
+            'Q_t': Q_t,
+            'Q_mean': Q_mean,
+        }
+
+        return climate_model_parameters

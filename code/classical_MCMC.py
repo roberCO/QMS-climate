@@ -33,3 +33,12 @@ class Classical_MCMC:
         )
 
         print(f"📄 Data saved successfully at: {self.tools.get_config_variable('data_save_path')+'QH_classical_data.txt'}")
+
+        classical_MCMC_parameters = {
+            'Q_final': Q_final,
+            'H_final': H_final,
+            'P_Q_posterior': P_Q_posterior,
+            'P_H_posterior': P_H_posterior
+        }
+        
+        return classical_MCMC_parameters
