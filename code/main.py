@@ -2,7 +2,8 @@ import utils
 import flood_model
 import classical_MCMC
 import quantum_MCMC
-from plotter import plotter_inference_results, plotter_climate_model
+import plotter_inference_results
+import plotter_climate_model
 
 print('\n#########################################################################################')
 print('##                                    QMS Climate                                    ##')
@@ -19,7 +20,7 @@ args = tools.parse_arguments()
 
 climate_model_generator = flood_model.Flood_model(tools)
 classical_agent = classical_MCMC.Classical_MCMC()
-quantum_agent = quantum_MCMC.Quantum_MCMC()
+quantum_agent = quantum_MCMC.Quantum_MCMC(tools)
 plotter_climate = plotter_climate_model.Plotter_climate_model(tools)
 plotter_inf = plotter_inference_results.Plotter_inference_results(tools)
 
