@@ -9,7 +9,7 @@ from pulser.waveforms import InterpolatedWaveform
 from tqdm import tqdm 
 
 
-class quantum_MCMC:
+class Quantum_MCMC:
     
     def __init__(self, tools):
         

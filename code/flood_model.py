@@ -10,7 +10,7 @@ class Flood_model:
         self.tools = tools
 
     # Bayesian flood model
-    def flood_model(self, R_prev, Q_obs, H_obs):
+    def flood_model_generation(self):
         """
         Simulates the evolution of discharge (Q) and water level (H) over time (in hours),
         given historical rainfall data. Uses a dynamic Bayesian approach.
@@ -29,12 +29,12 @@ class Flood_model:
         H_t = jnp.zeros(self.tools.get_config_variable('T'))
         
         # Set initial conditions
-        Q_t = Q_t.at[0].set(Q_obs)
-        H_t = H_t.at[0].set(H_obs)
+        Q_t = Q_t.at[0].set(self.tools.get_config_variable('Q_obs'))
+        H_t = H_t.at[0].set(self.tools.get_config_variable('H_obs'))
 
         # Time-step simulation using a simple water balance model
         for t in range(1, self.tools.get_config_variable('T')):
-            rainfall = R_prev[t]  # Rainfall at time step t (hourly)
+            rainfall = self.tools.get_config_variable('R_prev')[t]  # Rainfall at time step t (hourly)
             # Update discharge: previous discharge + rainfall effect - drainage loss
             Q_t = Q_t.at[t].set(Q_t[t-1] + self.tools.get_config_variable('beta_Q') * rainfall - self.tools.get_config_variable('alpha_Q') * Q_t[t-1])
             # Update water level: previous level + effect of discharge change - drainage loss
